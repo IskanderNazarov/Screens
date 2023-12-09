@@ -62,14 +62,14 @@ public class Market : MonoBehaviour, IIAPListener, IResourceChangeListener {
     }
     
     public void BuyCharacter_1() {
-        if (ResourceManager.shared.CanUseTickets(300)){
-            ResourceManager.shared.UseTickets(300);
+        if (ResourceManager.shared.CanUseTickets(500)){
+            ResourceManager.shared.UseTickets(500);
         }
     }
     
     public void BuyCharacter_2() {
-        if (ResourceManager.shared.CanUseTickets(300)){
-            ResourceManager.shared.UseTickets(300);
+        if (ResourceManager.shared.CanUseTickets(500)){
+            ResourceManager.shared.UseTickets(500);
         }
     }
 
