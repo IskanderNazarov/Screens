@@ -7,6 +7,7 @@ public class ResourceManager : MonoBehaviour {
     public static string TICKETS_COUNT_KEY = "tickets_count_key";
 
 
+    public int Tickets => ticketsCount;
     private int ticketsCount;
     private HashSet<IResourceChangeListener> listeners;
 
@@ -30,11 +31,13 @@ public class ResourceManager : MonoBehaviour {
 
     public void AddTickets(int tickets) {
         ticketsCount += tickets;
+        PlayerPrefs.SetInt(TICKETS_COUNT_KEY, ticketsCount);
         NotifyTicketsChanged();
     }
     
     public void UseTickets(int tickets) {
         ticketsCount -= tickets;
+        PlayerPrefs.SetInt(TICKETS_COUNT_KEY, ticketsCount);
         NotifyTicketsChanged();
     }
 

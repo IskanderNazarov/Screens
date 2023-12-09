@@ -2,6 +2,8 @@ using TMPro;
 using UnityEngine;
 
 public class DailyDialog : MonoBehaviour {
+    [SerializeField] private GameObject weekdaysPanel;
+    [SerializeField] private GameObject sundayPanel;
     [SerializeField] private DailyRewardIcon[] icons;
     [SerializeField] private TextMeshProUGUI progressText;
     [SerializeField] private RectTransform progressTr;
@@ -34,8 +36,12 @@ public class DailyDialog : MonoBehaviour {
             icons[i].UpdateItem(itemState);
         }
 
-        progressText.text = $"{dm.AvailableIndex + 1}/7";
-        var x = Mathf.Lerp(progressStartPos, progressEndPos, dm.AvailableIndex / 6f);
+        var activeDayIndex = dm.ActiveIndex;
+        weekdaysPanel.SetActive(activeDayIndex < icons.Length);
+        sundayPanel.SetActive(activeDayIndex >= icons.Length);
+
+        progressText.text = $"{dm.ActiveIndex + 1}/7";
+        var x = Mathf.Lerp(progressStartPos, progressEndPos, dm.ActiveIndex / 6f);
         var y = progressTr.anchoredPosition.y;
         progressTr.anchoredPosition = new Vector2(x, y);
     }
@@ -46,7 +52,8 @@ public class DailyDialog : MonoBehaviour {
 
     public void ItemClicked(int index) {
         DailyRewardManager.shared.CollectReward(index);
+        ResourceManager.shared.AddTickets(icons[index].Reward);
         UpdateItems();
-        //todo add tickets
+        Hide();
     }
 }

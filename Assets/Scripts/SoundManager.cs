@@ -18,9 +18,13 @@ namespace DefaultNamespace {
 
         [SerializeField] private AudioSource bgMusicAudio;
         [SerializeField] private AudioClip bgMusic;
+        [SerializeField] private AudioClip buttonTapSound;
+        
         public bool IsSoundOn { get; private set; }
         public bool IsMusicOn { get; private set; }
+        
         private float bgMusicOriginVolume = 0.5f;
+        private AudioSource uiAudioSource;
 
         private void Start() {
             IsSoundOn = PlayerPrefs.GetInt(IS_SOUND_ON_KEY, 1) == 1;
@@ -29,6 +33,8 @@ namespace DefaultNamespace {
             bgMusicAudio.volume = bgMusicOriginVolume;
             bgMusicAudio.clip = bgMusic;
             bgMusicAudio.Play();
+
+            uiAudioSource = gameObject.AddComponent<AudioSource>();
         }
 
         private void UpdateBgMusicState() {
@@ -41,6 +47,10 @@ namespace DefaultNamespace {
             source.clip = clip;
             source.volume = volume;
             source.Play();
+        }
+
+        public void PlayButtonSound() {
+            PlaySound(uiAudioSource, buttonTapSound);
         }
 
         public void ChangeMusicOnOffState() {

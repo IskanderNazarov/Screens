@@ -26,10 +26,10 @@ public class Market : MonoBehaviour, IIAPListener, IResourceChangeListener {
 
     public void OnProductPurchased(string productId) {
         if (productId == Purchaser.chest_1_ID) {
-            ResourceManager.shared.AddTickets(200);
+            ResourceManager.shared.AddTickets(500);
         }
         else if (productId == Purchaser.chest_2_ID) {
-            ResourceManager.shared.AddTickets(500);
+            ResourceManager.shared.AddTickets(1200);
         }
     }
 
